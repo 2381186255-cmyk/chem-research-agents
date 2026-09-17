@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# 运行产物：各主题独立工作区与输出目录不入库
+workspace/
+output/
+
+# 临时文件（知识库原子写入使用的中间文件）
+.tmp_*
+*.swp
+*~
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
