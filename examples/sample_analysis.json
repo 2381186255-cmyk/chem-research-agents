@@ -1,0 +1,960 @@
+{
+  "corpus": {
+    "total": 34,
+    "with_abstract": 25,
+    "with_doi": 28,
+    "open_access": 24,
+    "by_source": {
+      "openalex": 12,
+      "crossref": 6,
+      "europepmc": 8,
+      "arxiv": 8
+    }
+  },
+  "year_trend": {
+    "counts": {
+      "2008": 2,
+      "2010": 2,
+      "2012": 1,
+      "2013": 1,
+      "2016": 1,
+      "2017": 3,
+      "2019": 2,
+      "2021": 2,
+      "2022": 2,
+      "2023": 2,
+      "2024": 1,
+      "2025": 1,
+      "2026": 8
+    },
+    "span": [
+      2008,
+      2026
+    ],
+    "median_year": 2022,
+    "recent_window": 3,
+    "recent_count": 10,
+    "recent_share": 0.357,
+    "undated": 6
+  },
+  "top_papers": [
+    {
+      "id": "10.1039/c8cs00829a",
+      "title": "Carbon capture and conversion using metal–organic frameworks and MOF-based materials",
+      "year": 2019,
+      "citations": 2643,
+      "venue": "Chemical Society Reviews",
+      "doi": "10.1039/c8cs00829a",
+      "source": "openalex",
+      "url": "https://openalex.org/W2942998504"
+    },
+    {
+      "id": "10.1021/acs.chemrev.6b00173",
+      "title": "Direct Capture of CO2 from Ambient Air",
+      "year": 2016,
+      "citations": 2367,
+      "venue": "Chemical Reviews",
+      "doi": "10.1021/acs.chemrev.6b00173",
+      "source": "openalex",
+      "url": "https://openalex.org/W2508859475"
+    },
+    {
+      "id": "10.4209/aaqr.2012.05.0132",
+      "title": "A Review of CO2 Capture by Absorption and Adsorption",
+      "year": 2012,
+      "citations": 1730,
+      "venue": "Aerosol and Air Quality Research",
+      "doi": "10.4209/aaqr.2012.05.0132",
+      "source": "openalex",
+      "url": "https://openalex.org/W2144754980"
+    },
+    {
+      "id": "10.1002/anie.202106259",
+      "title": "The Current Status of MOF and COF Applications",
+      "year": 2021,
+      "citations": 1198,
+      "venue": "Angewandte Chemie International Edition",
+      "doi": "10.1002/anie.202106259",
+      "source": "openalex",
+      "url": "https://openalex.org/W3161898781"
+    },
+    {
+      "id": "10.1039/c7cs00109f",
+      "title": "New synthetic routes towards MOF production at scale",
+      "year": 2017,
+      "citations": 979,
+      "venue": "Chemical Society Reviews",
+      "doi": "10.1039/c7cs00109f",
+      "source": "openalex",
+      "url": "https://openalex.org/W2618624048"
+    },
+    {
+      "id": "10.1038/s41586-019-1798-7",
+      "title": "Data-driven design of metal–organic frameworks for wet flue gas CO2 capture",
+      "year": 2019,
+      "citations": 910,
+      "venue": "Nature",
+      "doi": "10.1038/s41586-019-1798-7",
+      "source": "openalex",
+      "url": "https://openalex.org/W2992843173"
+    },
+    {
+      "id": "10.1038/nenergy.2017.86",
+      "title": "Enhanced selectivity in mixed matrix membranes for CO2 capture through efficient dispersion of amine-functionalized MOF nanoparticles",
+      "year": 2017,
+      "citations": 600,
+      "venue": "Nature Energy",
+      "doi": "10.1038/nenergy.2017.86",
+      "source": "openalex",
+      "url": "https://openalex.org/W2621508343"
+    },
+    {
+      "id": "10.1021/jacs.3c05819",
+      "title": "ChatGPT Chemistry Assistant for Text Mining and the Prediction of MOF Synthesis",
+      "year": 2023,
+      "citations": 535,
+      "venue": "Journal of the American Chemical Society",
+      "doi": "10.1021/jacs.3c05819",
+      "source": "openalex",
+      "url": "https://openalex.org/W4385027818"
+    },
+    {
+      "id": "10.1016/j.apcatb.2017.03.039",
+      "title": "CO2 capture and photocatalytic reduction using bifunctional TiO2/MOF nanocomposites under UV–vis irradiation",
+      "year": 2017,
+      "citations": 357,
+      "venue": "Applied Catalysis B: Environmental",
+      "doi": "10.1016/j.apcatb.2017.03.039",
+      "source": "openalex",
+      "url": "https://openalex.org/W2595743922"
+    },
+    {
+      "id": "10.1021/cg100646e",
+      "title": "Functionalized MOFs for Enhanced CO2 Capture",
+      "year": 2010,
+      "citations": 293,
+      "venue": "Crystal Growth & Design",
+      "doi": "10.1021/cg100646e",
+      "source": "openalex",
+      "url": "https://openalex.org/W2077920739"
+    }
+  ],
+  "concepts": {
+    "by_paper": {
+      "10.1039/c8cs00829a": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture",
+          "CO2 conversion"
+        ],
+        "metric": [
+          "capacity",
+          "stability"
+        ]
+      },
+      "10.1038/nenergy.2017.86": {
+        "material": [
+          "MOF",
+          "nanoparticle"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": [
+          "selectivity"
+        ]
+      },
+      "10.1021/cg100646e": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "density functional theory",
+          "grand canonical Monte Carlo"
+        ],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": [
+          "capacity"
+        ]
+      },
+      "10.1021/acs.chemrev.6b00173": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.1016/j.jece.2022.108930": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": [
+          "selectivity",
+          "capacity",
+          "regenerability"
+        ]
+      },
+      "10.1016/j.apcatb.2017.03.039": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "photocatalysis"
+        ],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.70675/81145f40zff06z4222za576z511da54e1347": {
+        "material": [
+          "MOF",
+          "graphene",
+          "graphene oxide",
+          "deep eutectic solvent"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.1021/acsmaterialslett.3c00708.s001": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "10.1021/acsanm.3c02916.s001": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.1021/acsami.4c19826.s001": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.1002/smll.75067": {
+        "material": [
+          "MOF",
+          "COF"
+        ],
+        "method": [
+          "defect engineering"
+        ],
+        "application": [],
+        "metric": [
+          "selectivity",
+          "stability"
+        ]
+      },
+      "10.1038/s41598-026-51315-2": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "X-ray diffraction",
+          "doping"
+        ],
+        "application": [
+          "gas separation"
+        ],
+        "metric": [
+          "stability"
+        ]
+      },
+      "10.1021/acsomega.6c03606": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [],
+        "metric": [
+          "selectivity",
+          "capacity",
+          "stability"
+        ]
+      },
+      "10.1039/d6sc03678c": {
+        "material": [
+          "MOF",
+          "COF"
+        ],
+        "method": [],
+        "application": [],
+        "metric": [
+          "selectivity",
+          "stability"
+        ]
+      },
+      "10.3390/nano16150949": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "solvothermal synthesis",
+          "hydrothermal synthesis",
+          "post-synthetic modification",
+          "defect engineering"
+        ],
+        "application": [],
+        "metric": [
+          "selectivity",
+          "stability",
+          "surface area",
+          "regenerability"
+        ]
+      },
+      "10.1021/acs.iecr.5c05045": {
+        "material": [
+          "MOF",
+          "activated carbon"
+        ],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "waterstablemofsandhydrophobicallyencapsulatedmofsforco2capturefromambientairandwetfluegas": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "preypredatormodelingofco2atmosphericconcentration": {
+        "material": [],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "decodinglocalframeworkdynamicsintheultrasmallporemofmil120alco2sorbentwithmachinelearnedpotentials": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "density functional theory"
+        ],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.2174/1874282300802010217": {
+        "material": [],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "carbnnanovelactivetransferlearningneuralnetworktobuilddenovometalorganicframeworksmofsforcarboncapture": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "electrocatalysis"
+        ],
+        "application": [
+          "CO2 capture",
+          "gas separation",
+          "catalysis"
+        ],
+        "metric": []
+      },
+      "co2efficientdistributedtrainingwithfullcommunicationcomputationoverlap": {
+        "material": [],
+        "method": [],
+        "application": [],
+        "metric": [
+          "capacity",
+          "stability"
+        ]
+      },
+      "10.1016/j.apsusc.2013.07.068": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.4209/aaqr.2012.05.0132": {
+        "material": [
+          "ionic liquid"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": [
+          "capacity",
+          "stability",
+          "regenerability"
+        ]
+      },
+      "10.1002/anie.202106259": {
+        "material": [
+          "MOF",
+          "COF"
+        ],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "10.1038/s41586-019-1798-7": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.1039/c7cs00109f": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "10.1021/jacs.3c05819": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "machine learning"
+        ],
+        "application": [],
+        "metric": []
+      },
+      "10.1021/acs.inorgchem.8b03271.s001": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "10.1021/acs.iecr.8b05239.s001": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "CO2 capture"
+        ],
+        "metric": []
+      },
+      "10.1002/cssc.71010": {
+        "material": [
+          "MOF"
+        ],
+        "method": [],
+        "application": [
+          "catalysis"
+        ],
+        "metric": [
+          "stability"
+        ]
+      },
+      "10.1039/d6na00475j": {
+        "material": [
+          "MOF"
+        ],
+        "method": [
+          "X-ray diffraction",
+          "photocatalysis"
+        ],
+        "application": [],
+        "metric": []
+      },
+      "synthesisofreversiblefunctionsbeyondgatecountandquantumcost": {
+        "material": [],
+        "method": [],
+        "application": [],
+        "metric": []
+      },
+      "10.1007/978-3-030-87592-3_5": {
+        "material": [],
+        "method": [],
+        "application": [],
+        "metric": []
+      }
+    },
+    "frequency": {
+      "material": {
+        "MOF": 28,
+        "nanoparticle": 1,
+        "graphene": 1,
+        "graphene oxide": 1,
+        "deep eutectic solvent": 1,
+        "COF": 3,
+        "activated carbon": 1,
+        "ionic liquid": 1
+      },
+      "method": {
+        "density functional theory": 2,
+        "grand canonical Monte Carlo": 1,
+        "photocatalysis": 2,
+        "defect engineering": 2,
+        "X-ray diffraction": 2,
+        "doping": 1,
+        "solvothermal synthesis": 1,
+        "hydrothermal synthesis": 1,
+        "post-synthetic modification": 1,
+        "electrocatalysis": 1,
+        "machine learning": 1
+      },
+      "application": {
+        "CO2 capture": 16,
+        "CO2 conversion": 1,
+        "gas separation": 2,
+        "catalysis": 2
+      },
+      "metric": {
+        "capacity": 6,
+        "stability": 9,
+        "selectivity": 6,
+        "regenerability": 3,
+        "surface area": 1
+      }
+    },
+    "evidence": {
+      "material": {
+        "MOF": [
+          "10.1039/c8cs00829a",
+          "10.1038/nenergy.2017.86",
+          "10.1021/cg100646e",
+          "10.1021/acs.chemrev.6b00173",
+          "10.1016/j.jece.2022.108930",
+          "10.1016/j.apcatb.2017.03.039",
+          "10.70675/81145f40zff06z4222za576z511da54e1347",
+          "10.1021/acsmaterialslett.3c00708.s001",
+          "10.1021/acsanm.3c02916.s001",
+          "10.1021/acsami.4c19826.s001",
+          "10.1002/smll.75067",
+          "10.1038/s41598-026-51315-2",
+          "10.1021/acsomega.6c03606",
+          "10.1039/d6sc03678c",
+          "10.3390/nano16150949",
+          "10.1021/acs.iecr.5c05045",
+          "waterstablemofsandhydrophobicallyencapsulatedmofsforco2capturefromambientairandwetfluegas",
+          "decodinglocalframeworkdynamicsintheultrasmallporemofmil120alco2sorbentwithmachinelearnedpotentials",
+          "carbnnanovelactivetransferlearningneuralnetworktobuilddenovometalorganicframeworksmofsforcarboncapture",
+          "10.1016/j.apsusc.2013.07.068",
+          "10.1002/anie.202106259",
+          "10.1038/s41586-019-1798-7",
+          "10.1039/c7cs00109f",
+          "10.1021/jacs.3c05819",
+          "10.1021/acs.inorgchem.8b03271.s001",
+          "10.1021/acs.iecr.8b05239.s001",
+          "10.1002/cssc.71010",
+          "10.1039/d6na00475j"
+        ],
+        "nanoparticle": [
+          "10.1038/nenergy.2017.86"
+        ],
+        "graphene": [
+          "10.70675/81145f40zff06z4222za576z511da54e1347"
+        ],
+        "graphene oxide": [
+          "10.70675/81145f40zff06z4222za576z511da54e1347"
+        ],
+        "deep eutectic solvent": [
+          "10.70675/81145f40zff06z4222za576z511da54e1347"
+        ],
+        "COF": [
+          "10.1002/smll.75067",
+          "10.1039/d6sc03678c",
+          "10.1002/anie.202106259"
+        ],
+        "activated carbon": [
+          "10.1021/acs.iecr.5c05045"
+        ],
+        "ionic liquid": [
+          "10.4209/aaqr.2012.05.0132"
+        ]
+      },
+      "method": {
+        "density functional theory": [
+          "10.1021/cg100646e",
+          "decodinglocalframeworkdynamicsintheultrasmallporemofmil120alco2sorbentwithmachinelearnedpotentials"
+        ],
+        "grand canonical Monte Carlo": [
+          "10.1021/cg100646e"
+        ],
+        "photocatalysis": [
+          "10.1016/j.apcatb.2017.03.039",
+          "10.1039/d6na00475j"
+        ],
+        "defect engineering": [
+          "10.1002/smll.75067",
+          "10.3390/nano16150949"
+        ],
+        "X-ray diffraction": [
+          "10.1038/s41598-026-51315-2",
+          "10.1039/d6na00475j"
+        ],
+        "doping": [
+          "10.1038/s41598-026-51315-2"
+        ],
+        "solvothermal synthesis": [
+          "10.3390/nano16150949"
+        ],
+        "hydrothermal synthesis": [
+          "10.3390/nano16150949"
+        ],
+        "post-synthetic modification": [
+          "10.3390/nano16150949"
+        ],
+        "electrocatalysis": [
+          "carbnnanovelactivetransferlearningneuralnetworktobuilddenovometalorganicframeworksmofsforcarboncapture"
+        ],
+        "machine learning": [
+          "10.1021/jacs.3c05819"
+        ]
+      },
+      "application": {
+        "CO2 capture": [
+          "10.1039/c8cs00829a",
+          "10.1038/nenergy.2017.86",
+          "10.1021/cg100646e",
+          "10.1021/acs.chemrev.6b00173",
+          "10.1016/j.jece.2022.108930",
+          "10.1016/j.apcatb.2017.03.039",
+          "10.70675/81145f40zff06z4222za576z511da54e1347",
+          "10.1021/acsanm.3c02916.s001",
+          "10.1021/acsami.4c19826.s001",
+          "waterstablemofsandhydrophobicallyencapsulatedmofsforco2capturefromambientairandwetfluegas",
+          "decodinglocalframeworkdynamicsintheultrasmallporemofmil120alco2sorbentwithmachinelearnedpotentials",
+          "carbnnanovelactivetransferlearningneuralnetworktobuilddenovometalorganicframeworksmofsforcarboncapture",
+          "10.1016/j.apsusc.2013.07.068",
+          "10.4209/aaqr.2012.05.0132",
+          "10.1038/s41586-019-1798-7",
+          "10.1021/acs.iecr.8b05239.s001"
+        ],
+        "CO2 conversion": [
+          "10.1039/c8cs00829a"
+        ],
+        "gas separation": [
+          "10.1038/s41598-026-51315-2",
+          "carbnnanovelactivetransferlearningneuralnetworktobuilddenovometalorganicframeworksmofsforcarboncapture"
+        ],
+        "catalysis": [
+          "carbnnanovelactivetransferlearningneuralnetworktobuilddenovometalorganicframeworksmofsforcarboncapture",
+          "10.1002/cssc.71010"
+        ]
+      },
+      "metric": {
+        "capacity": [
+          "10.1039/c8cs00829a",
+          "10.1021/cg100646e",
+          "10.1016/j.jece.2022.108930",
+          "10.1021/acsomega.6c03606",
+          "co2efficientdistributedtrainingwithfullcommunicationcomputationoverlap",
+          "10.4209/aaqr.2012.05.0132"
+        ],
+        "stability": [
+          "10.1039/c8cs00829a",
+          "10.1002/smll.75067",
+          "10.1038/s41598-026-51315-2",
+          "10.1021/acsomega.6c03606",
+          "10.1039/d6sc03678c",
+          "10.3390/nano16150949",
+          "co2efficientdistributedtrainingwithfullcommunicationcomputationoverlap",
+          "10.4209/aaqr.2012.05.0132",
+          "10.1002/cssc.71010"
+        ],
+        "selectivity": [
+          "10.1038/nenergy.2017.86",
+          "10.1016/j.jece.2022.108930",
+          "10.1002/smll.75067",
+          "10.1021/acsomega.6c03606",
+          "10.1039/d6sc03678c",
+          "10.3390/nano16150949"
+        ],
+        "regenerability": [
+          "10.1016/j.jece.2022.108930",
+          "10.3390/nano16150949",
+          "10.4209/aaqr.2012.05.0132"
+        ],
+        "surface area": [
+          "10.3390/nano16150949"
+        ]
+      }
+    }
+  },
+  "concept_summary": {
+    "material": {
+      "MOF": 28,
+      "COF": 3,
+      "nanoparticle": 1,
+      "graphene": 1,
+      "graphene oxide": 1,
+      "deep eutectic solvent": 1,
+      "activated carbon": 1,
+      "ionic liquid": 1
+    },
+    "method": {
+      "density functional theory": 2,
+      "photocatalysis": 2,
+      "defect engineering": 2,
+      "X-ray diffraction": 2,
+      "grand canonical Monte Carlo": 1,
+      "doping": 1,
+      "solvothermal synthesis": 1,
+      "hydrothermal synthesis": 1,
+      "post-synthetic modification": 1,
+      "electrocatalysis": 1,
+      "machine learning": 1
+    },
+    "application": {
+      "CO2 capture": 16,
+      "gas separation": 2,
+      "catalysis": 2,
+      "CO2 conversion": 1
+    },
+    "metric": {
+      "stability": 9,
+      "capacity": 6,
+      "selectivity": 6,
+      "regenerability": 3,
+      "surface area": 1
+    }
+  },
+  "cooccurrence": [
+    {
+      "left": "材料体系:MOF",
+      "right": "应用场景:CO2 capture",
+      "count": 15
+    },
+    {
+      "left": "应用场景:CO2 capture",
+      "right": "性能指标:capacity",
+      "count": 4
+    },
+    {
+      "left": "材料体系:MOF",
+      "right": "应用场景:gas separation",
+      "count": 2
+    },
+    {
+      "left": "材料体系:MOF",
+      "right": "应用场景:catalysis",
+      "count": 2
+    },
+    {
+      "left": "方法技术:density functional theory",
+      "right": "应用场景:CO2 capture",
+      "count": 2
+    },
+    {
+      "left": "材料体系:MOF",
+      "right": "方法技术:density functional theory",
+      "count": 2
+    },
+    {
+      "left": "材料体系:MOF",
+      "right": "方法技术:photocatalysis",
+      "count": 2
+    },
+    {
+      "left": "材料体系:MOF",
+      "right": "方法技术:defect engineering",
+      "count": 2
+    },
+    {
+      "left": "材料体系:MOF",
+      "right": "方法技术:X-ray diffraction",
+      "count": 2
+    },
+    {
+      "left": "应用场景:CO2 capture",
+      "right": "性能指标:stability",
+      "count": 2
+    },
+    {
+      "left": "应用场景:CO2 capture",
+      "right": "性能指标:selectivity",
+      "count": 2
+    },
+    {
+      "left": "应用场景:CO2 capture",
+      "right": "性能指标:regenerability",
+      "count": 2
+    },
+    {
+      "left": "材料体系:MOF",
+      "right": "应用场景:CO2 conversion",
+      "count": 1
+    },
+    {
+      "left": "材料体系:nanoparticle",
+      "right": "应用场景:CO2 capture",
+      "count": 1
+    },
+    {
+      "left": "材料体系:graphene",
+      "right": "应用场景:CO2 capture",
+      "count": 1
+    }
+  ],
+  "gap_thresholds": {
+    "corpus_size": 34,
+    "min_freq": 2,
+    "min_expected": 0.6
+  },
+  "gaps": [
+    {
+      "left_category": "material",
+      "left_term": "COF",
+      "right_category": "application",
+      "right_term": "CO2 capture",
+      "left_freq": 3,
+      "right_freq": 16,
+      "cooccur": 0,
+      "expected": 1.41,
+      "novelty": 1.0,
+      "evidence": 0.706,
+      "feasibility": 1.0,
+      "momentum": 0.375,
+      "score": 0.8327,
+      "verdict": "语料内零共现（待反证）",
+      "left_exemplar": {
+        "id": "10.1002/anie.202106259",
+        "title": "The Current Status of MOF and COF Applications",
+        "year": 2021,
+        "citations": 1198,
+        "doi": "10.1002/anie.202106259"
+      },
+      "right_exemplar": {
+        "id": "10.1039/c8cs00829a",
+        "title": "Carbon capture and conversion using metal–organic frameworks and MOF-based materials",
+        "year": 2019,
+        "citations": 2643,
+        "doi": "10.1039/c8cs00829a"
+      }
+    },
+    {
+      "left_category": "method",
+      "left_term": "defect engineering",
+      "right_category": "application",
+      "right_term": "CO2 capture",
+      "left_freq": 2,
+      "right_freq": 16,
+      "cooccur": 0,
+      "expected": 0.94,
+      "novelty": 1.0,
+      "evidence": 0.471,
+      "feasibility": 1.0,
+      "momentum": 0.541,
+      "score": 0.7989,
+      "verdict": "语料内零共现（待反证）",
+      "left_exemplar": {
+        "id": "10.1002/smll.75067",
+        "title": "Advanced Porous Materials in Mixed Matrix Membranes for CO&lt;sub&gt;2&lt;/sub&gt; Capture.",
+        "year": 2026,
+        "citations": 0,
+        "doi": "10.1002/smll.75067"
+      },
+      "right_exemplar": {
+        "id": "10.1039/c8cs00829a",
+        "title": "Carbon capture and conversion using metal–organic frameworks and MOF-based materials",
+        "year": 2019,
+        "citations": 2643,
+        "doi": "10.1039/c8cs00829a"
+      }
+    },
+    {
+      "left_category": "method",
+      "left_term": "X-ray diffraction",
+      "right_category": "application",
+      "right_term": "CO2 capture",
+      "left_freq": 2,
+      "right_freq": 16,
+      "cooccur": 0,
+      "expected": 0.94,
+      "novelty": 1.0,
+      "evidence": 0.471,
+      "feasibility": 1.0,
+      "momentum": 0.541,
+      "score": 0.7989,
+      "verdict": "语料内零共现（待反证）",
+      "left_exemplar": {
+        "id": "10.1038/s41598-026-51315-2",
+        "title": "Synthesis, characterization and comparative study of Zn, Fe, and Cu MOFs-impregnated polysulfone mixed-matrix membranes for CO&lt;sub&gt;2&lt;/sub&gt;/N&lt;sub&gt;2&lt;/sub&gt; gas separation.",
+        "year": 2026,
+        "citations": 0,
+        "doi": "10.1038/s41598-026-51315-2"
+      },
+      "right_exemplar": {
+        "id": "10.1039/c8cs00829a",
+        "title": "Carbon capture and conversion using metal–organic frameworks and MOF-based materials",
+        "year": 2019,
+        "citations": 2643,
+        "doi": "10.1039/c8cs00829a"
+      }
+    },
+    {
+      "left_category": "application",
+      "left_term": "CO2 capture",
+      "right_category": "metric",
+      "right_term": "stability",
+      "left_freq": 16,
+      "right_freq": 9,
+      "cooccur": 2,
+      "expected": 4.24,
+      "novelty": 0.528,
+      "evidence": 1.0,
+      "feasibility": 1.0,
+      "momentum": 0.43,
+      "score": 0.7257,
+      "verdict": "存在少量交叉（待反证）",
+      "left_exemplar": {
+        "id": "10.1039/c8cs00829a",
+        "title": "Carbon capture and conversion using metal–organic frameworks and MOF-based materials",
+        "year": 2019,
+        "citations": 2643,
+        "doi": "10.1039/c8cs00829a"
+      },
+      "right_exemplar": {
+        "id": "10.1039/c8cs00829a",
+        "title": "Carbon capture and conversion using metal–organic frameworks and MOF-based materials",
+        "year": 2019,
+        "citations": 2643,
+        "doi": "10.1039/c8cs00829a"
+      }
+    }
+  ]
+}
