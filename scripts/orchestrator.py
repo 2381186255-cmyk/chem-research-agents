@@ -35,6 +35,7 @@ from kb import ResearchKB, read_json
 from reviewer import Reviewer
 from sources import Paper, SourceRegistry
 from verify import make_hypothesis, pick_domain_anchor, status_of, verify_gap
+from visualize import build_visualization
 from writer import compose_report
 
 DEPTH_PRESETS = {
@@ -443,6 +444,29 @@ class WriterStage(Stage):
 
 
 # ==========================================================================
+# 角色七：可视化师
+# ==========================================================================
+
+class VisualizeStage(Stage):
+    key = "visualize"
+    name_zh = "研究可视化"
+    role = "可视化师"
+
+    def run(self, ctx: Context) -> dict:
+        self._hdr(7)
+        if ctx.review and not ctx.review.get("passed"):
+            print("  审稿门禁未通过，按规约不产出可视化。", flush=True)
+            return {"skipped": True, "blocked_by_gate": True}
+
+        text = build_visualization(ctx.analysis, ctx.topic, ctx.domain.name_zh)
+        path = ctx.kb.write_report("visualization.html", text)
+        print(f"  可视化已写出：{path}", flush=True)
+        print(f"  内容：概念网络 / 共现热力图 / 年代趋势（自包含，可离线打开）",
+              flush=True)
+        return {"visualization": str(path), "bytes": len(text)}
+
+
+# ==========================================================================
 # 主控
 # ==========================================================================
 
@@ -469,11 +493,18 @@ class Orchestrator:
         self.resume = resume
         self.stages: list[Stage] = [
             ScoutStage(), AnalystStage(), HypothesizerStage(),
-            ExperimenterStage(), ReviewStage(), WriterStage(),
+            ExperimenterStage(), ReviewStage(), WriterStage(), VisualizeStage(),
         ]
 
     def _restore(self) -> None:
-        """断点恢复：重建上下文。"""
+        """断点恢复：重建上下文。
+
+        要恢复的不只是「跑到哪了」，还包括各阶段产出的**上下文数据**。
+        实测已两次踩坑：
+          · 漏恢复 ledger      -> 审稿人看到「在线 0 个」，误判阻断交付
+          · 漏恢复 round_logs  -> 审稿人看不到迭代轮次与领域锚点，误报告警
+        教训：每新增一个跨阶段共享的数据，就必须同步补一条恢复逻辑。
+        """
         ctx = self.ctx
         if ctx.kb.is_done("scout"):
             ctx.restore_papers()
@@ -482,6 +513,12 @@ class Orchestrator:
             ctx.restore_analysis()
         if ctx.kb.is_done("hypothesize") or ctx.kb.is_done("experiment"):
             ctx.restore_propositions()
+        if ctx.kb.is_done("experiment"):
+            meta = ctx.kb.state["stages"].get("experiment", {}).get("meta", {}) or {}
+            ctx.round_logs = meta.get("round_logs", []) or []
+            anchor_term = meta.get("domain_anchor")
+            if anchor_term:
+                ctx.anchor = (anchor_term, "")
 
     def run(self) -> dict:
         ctx = self.ctx
