@@ -57,10 +57,22 @@ def compose_report(*, topic: str, domain, depth: str, kb=None,
       f"中位年份 {trend.get('median_year', '未知')}，"
       f"近三年文献占比 {trend.get('recent_share', 0):.0%}。")
     A("")
-    A(f"经过概念结构分析与**定向反证检索**双重筛选，共形成 {len(props)} 条候选切入点："
+    A(f"经过概念结构分析、**统计显著性检验**与**定向反证检索**三重筛选，"
+      f"共形成 {len(props)} 条候选切入点："
       f"其中 **{n_conf} 条通过反证验证（A 级）**、{n_unc} 条待人工判读（B 级）、"
       f"{n_ref} 条被证据推翻（C 级）。")
     A("")
+    gs = analysis.get("gap_stats", {}) or {}
+    if gs:
+        A(f"统计层面共检验 **{gs.get('total', 0)}** 个概念组合，采用 "
+          f"Benjamini-Hochberg 方法校正多重比较（α = {gs.get('alpha', 0.05)}），"
+          f"校正后 **{gs.get('significant', 0)}** 个组合的「共现不足」达到统计显著。")
+        if gs.get("significant", 0) == 0:
+            A("")
+            A("> 注意：当前语料规模下**尚无组合通过显著性检验**。这意味着下面的候选"
+              "虽然呈现「共现不足」，但该现象无法排除随机波动，"
+              "空白判断**主要依赖反证检索**的结果，证据强度需谨慎评估。")
+        A("")
     if review and not review.get("passed"):
         A("> **注意**：本次结果未通过验收门禁，结论仅供内部参考，不建议对外使用。")
         A("")
@@ -157,6 +169,15 @@ def compose_report(*, topic: str, domain, depth: str, kb=None,
             A(f"- **综合评分**：{prop.get('score'):.3f}"
               f"（新颖性 {prop.get('novelty')} / 证据 {prop.get('evidence')} / "
               f"可行性 {prop.get('feasibility')} / 动量 {prop.get('momentum')}）")
+        # 统计检验结果必须与综合评分并列展示 —— 综合分高不代表证据足
+        if prop.get("p_value") is not None:
+            sig = "统计显著" if prop.get("significant") else "统计不显著"
+            A(f"- **统计检验**：p = {prop.get('p_value')}，"
+              f"FDR 校正后 q = {prop.get('q_value')} → {sig}；"
+              f"提升度 {prop.get('lift_value')}，优势比 {prop.get('odds_ratio')}")
+            if not prop.get("significant"):
+                A(f"  - 解读：在当前语料规模下，此处的「共现不足」无法排除随机波动，"
+                  f"统计证据**不足以单独支撑**该空白判断，需结合下方反证结果综合看待")
         A(f"- **反证结论**：{ver.get('verdict', '未执行')}")
         if ver:
             A(f"- **反证过程**：检索 {ver.get('retrieved', 0)} 篇，"
@@ -225,6 +246,11 @@ def compose_report(*, topic: str, domain, depth: str, kb=None,
     A("- **结构洞探测**：以「两概念独立时的期望共现」为基准，识别显著低共现的跨类别组合")
     A("- **定向反证**：对每条候选构造带领域锚点的精准检索，用真实结果检验其是否为假空白")
     A("- **交叉密度判据**：以比例而非绝对篇数判定，避免小样本误判")
+    A("- **统计显著性检验**：对 2×2 列联表做 Fisher 精确检验（左尾），"
+      "再用 Benjamini-Hochberg 方法校正多重比较。一次检验几十个组合时，"
+      "若不校正，假阳性率会从 5% 飙升至 80% 以上")
+    A("- **效应量与 p 值并行**：p 值只回答「是否显著」，提升度与优势比回答"
+      "「差多少」。只报 p 值会掩盖效应大小，只报效应量则无法排除噪声，两者必须并列")
     A("")
     A("### 5.3 局限")
     A("")
@@ -232,6 +258,12 @@ def compose_report(*, topic: str, domain, depth: str, kb=None,
     A("2. 分析仅基于标题与摘要，付费墙文献若缺摘要则贡献有限")
     A("3. 语料来自有限检索式，是领域的采样而非全样本，「零共现」需谨慎解读")
     A("4. 成熟领域通常难以产出 A 级结论，这是方法论的诚实结果，不应通过放宽标准制造结论")
+    A("5. **统计判据与反证判据可能给出不同结论**：统计检验受语料规模制约"
+      "（语料偏小时几乎不可能达到显著），反证检索受覆盖范围制约"
+      "（检索不到不等于不存在）。两者结论不一致时，应理解为"
+      "「证据强度不足」，而不是「空白成立」")
+    A("6. **反证结果存在时间波动**：学术数据库持续更新，同一主题在不同时间"
+      "执行可能得到不同的交叉数。建议以「结论方向」而非「具体数字」作为决策依据")
     A("")
 
     # ---------------- 附录 ----------------
