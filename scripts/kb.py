@@ -150,7 +150,8 @@ class ResearchKB:
         "hypothesize": ["Propos"],
         "experiment": ["Verified", "Rejected"],
         "review": ["review_report.md", "review_verdict.json"],
-        "write": ["Reports"],
+        "write": ["Reports/research_report.md"],
+        "visualize": ["Reports/visualization.html"],
     }
 
     def reset_stage(self, stage: str, purge: bool = True) -> None:
