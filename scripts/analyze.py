@@ -24,6 +24,14 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime
 
 from domains import CATEGORY_LABEL_ZH, CONCEPT_CATEGORIES, ChemistryDomain
+from stats import (
+    benjamini_hochberg,
+    depletion_pvalue,
+    lift,
+    odds_ratio,
+    significance_label,
+    summarize_tests,
+)
 
 # 空白评分权重（合计 1.0）
 W_NOVELTY = 0.40
@@ -146,6 +154,16 @@ class GapCandidate:
     momentum: float
     score: float
     verdict: str
+    # ---- 统计显著性（V3 新增）----
+    # p_value: 共现不足的单尾检验 p 值
+    # q_value: Benjamini-Hochberg 校正后的 q 值（已修正多重比较）
+    # odds_ratio / lift: 效应量，小于 1 表示共现不足
+    # significant: q < 0.05，即统计上确实「共现显著不足」
+    p_value: float = 1.0
+    q_value: float = 1.0
+    odds_ratio: float = 1.0
+    lift_value: float = 1.0
+    significant: bool = False
     left_exemplar: dict = field(default_factory=dict)
     right_exemplar: dict = field(default_factory=dict)
 
@@ -238,6 +256,8 @@ def find_gaps(
     top_n: int = 12,
     now_year: int | None = None,
     recent_window: int = 3,
+    alpha: float = 0.05,
+    stats_out: dict | None = None,
 ) -> list[GapCandidate]:
     """探测跨类别未共现组合（结构洞式研究空白）。
 
@@ -285,7 +305,8 @@ def find_gaps(
         recent = sum(1 for y in yrs if y >= now_year - recent_window + 1)
         return round(recent / len(yrs), 3)
 
-    candidates: list[GapCandidate] = []
+    # ---- 第一阶段：枚举候选，计算评分与检验统计量（此时不做显著性判断）----
+    raw: list[dict] = []
     for left_cat, right_cat in domain.gap_pairs:
         left_ranked = sorted(freq.get(left_cat, {}).items(), key=lambda kv: kv[1], reverse=True)
         right_ranked = sorted(freq.get(right_cat, {}).items(), key=lambda kv: kv[1], reverse=True)
@@ -320,25 +341,46 @@ def find_gaps(
                 # 未经定向检索反证前不能称为空白。实测中相当比例的
                 # 语料内零共现，在精查后被发现是本领域已有研究（采样偏差）。
                 if co == 0:
-                    verdict = "语料内零共现（待反证）"
+                    base_verdict = "语料内零共现"
                 elif novelty >= 0.75:
-                    verdict = "共现显著低于期望（待反证）"
+                    base_verdict = "共现显著低于期望"
                 else:
-                    verdict = "存在少量交叉（待反证）"
+                    base_verdict = "存在少量交叉"
 
-                candidates.append(GapCandidate(
-                    left_category=left_cat, left_term=lt,
-                    right_category=right_cat, right_term=rt,
-                    left_freq=lf, right_freq=rf, cooccur=co,
-                    expected=round(expected, 2),
-                    novelty=novelty, evidence=evidence_score,
-                    feasibility=feasibility, momentum=momentum,
-                    score=score, verdict=verdict,
-                    left_exemplar=_exemplar(evid[left_cat][lt], paper_map, {}),
-                    right_exemplar=_exemplar(evid[right_cat][rt], paper_map, {}),
-                ))
+                raw.append({
+                    "left_category": left_cat, "left_term": lt,
+                    "right_category": right_cat, "right_term": rt,
+                    "left_freq": lf, "right_freq": rf, "cooccur": co,
+                    "expected": round(expected, 2),
+                    "novelty": novelty, "evidence": evidence_score,
+                    "feasibility": feasibility, "momentum": momentum,
+                    "score": score,
+                    "p_value": round(depletion_pvalue(co, n_corpus, lf, rf), 6),
+                    "odds_ratio": round(odds_ratio(co, n_corpus, lf, rf), 4),
+                    "lift_value": round(lift(co, n_corpus, lf, rf), 4),
+                    "_base_verdict": base_verdict,
+                    "left_exemplar": _exemplar(evid[left_cat][lt], paper_map, {}),
+                    "right_exemplar": _exemplar(evid[right_cat][rt], paper_map, {}),
+                })
 
-    candidates.sort(key=lambda g: g.score, reverse=True)
+    # ---- 第二阶段：批量多重比较校正 ----
+    # 关键：必须把全部候选的 p 值放在一起统一做 FDR 校正。若逐个单独判断
+    # 「p < 0.05 即显著」，检验 40 个组合后假阳性概率高达 87%
+    # （1 - 0.95^40），这是探索性研究最容易翻车的地方。
+    pvals = [r["p_value"] for r in raw]
+    rejected, qvals = benjamini_hochberg(pvals, alpha=alpha)
+    for i, r in enumerate(raw):
+        r["q_value"] = round(qvals[i], 6)
+        r["significant"] = bool(rejected[i])
+        r["verdict"] = (f"{r.pop('_base_verdict')}｜"
+                        f"{significance_label(qvals[i], alpha)}（待反证）")
+
+    if stats_out is not None:
+        stats_out.update(summarize_tests(pvals, alpha))
+
+    candidates = [GapCandidate(**r) for r in raw]
+    # 统计显著的优先，其余按综合分排序
+    candidates.sort(key=lambda g: (g.significant, g.score), reverse=True)
     return candidates[:top_n]
 
 
@@ -397,7 +439,12 @@ def analyze(papers: list, domain: type[ChemistryDomain], top_n_papers: int = 10,
         "min_freq": adaptive_min_freq(len(papers)),
         "min_expected": adaptive_min_expected(len(papers)),
     }
-    base["gaps"] = [g.to_dict() for g in find_gaps(papers, domain, base, top_n=top_n_gaps)]
+    # stats_out 收集的是**全部候选**的检验汇总（而非 top_n 截断后的子集），
+    # 这样统计汇总才反映真实的检验次数，多重比较校正才有意义。
+    gap_stats: dict = {}
+    gaps = find_gaps(papers, domain, base, top_n=top_n_gaps, stats_out=gap_stats)
+    base["gap_stats"] = gap_stats
+    base["gaps"] = [g.to_dict() for g in gaps]
     return base
 
 
