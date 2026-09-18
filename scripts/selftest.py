@@ -304,6 +304,57 @@ def test_reviewer_gate() -> None:
     check("审稿报告可渲染", "裁决" in rv3.report())
 
 
+def test_statistical_tests() -> None:
+    """统计显著性检验：用手工可验算的算例锁定正确性。"""
+    print("\n[用例 10] 统计显著性检验与多重比较校正")
+    from stats import (benjamini_hochberg, depletion_pvalue, lift,
+                       odds_ratio, significance_label, summarize_tests)
+
+    # N=8, f_a=4, f_b=4 的超几何分布可手工验算：
+    #   P(X=0)=1/70, P(X=1)=16/70, P(X=2)=36/70
+    #   => P(X<=0)=1/70, P(X<=1)=17/70, P(X<=2)=53/70
+    p0 = depletion_pvalue(0, 8, 4, 4)
+    check("Fisher 左尾 P(X<=0) = 1/70", abs(p0 - 1 / 70) < 1e-9, f"{p0:.6f}")
+    p1 = depletion_pvalue(1, 8, 4, 4)
+    check("Fisher 左尾 P(X<=1) = 17/70", abs(p1 - 17 / 70) < 1e-9, f"{p1:.6f}")
+    p2 = depletion_pvalue(2, 8, 4, 4)
+    check("Fisher 左尾 P(X<=2) = 53/70", abs(p2 - 53 / 70) < 1e-9, f"{p2:.6f}")
+    check("共现达到上限时 p 接近 1（不可能是共现不足）",
+          depletion_pvalue(4, 8, 4, 4) > 0.99)
+
+    # 效应量
+    check("零共现的 lift 为 0", lift(0, 100, 20, 20) == 0.0)
+    check("观测等于期望时 lift 为 1", abs(lift(4, 100, 20, 20) - 1.0) < 1e-9)
+    check("零共现的优势比小于 1（负相关）", odds_ratio(0, 100, 20, 20) < 1)
+
+    # FDR 校正：m=6, alpha=0.05 的临界值为 rank/6 × 0.05
+    ps = [0.001, 0.008, 0.02, 0.04, 0.30, 0.60]
+    rej, qs = benjamini_hochberg(ps, 0.05)
+    check("FDR 校正：前 3 个显著（p=0.04 已超临界值）",
+          sum(rej) == 3, f"实得 {sum(rej)}")
+    check("q 值随 p 值单调不减",
+          all(qs[i] <= qs[i + 1] + 1e-12 for i in range(len(qs) - 1)))
+    check("q 值不小于对应 p 值", all(qs[i] >= ps[i] - 1e-12 for i in range(len(ps))))
+
+    check("多个相同小 p 值全部显著",
+          sum(benjamini_hochberg([0.001] * 10, 0.05)[0]) == 10)
+    check("全是大 p 值则无一显著",
+          sum(benjamini_hochberg([0.5, 0.6, 0.7], 0.05)[0]) == 0)
+    check("空输入安全返回", benjamini_hochberg([]) == ([], []))
+
+    check("显著性标签：极显著", "极显著" in significance_label(0.005))
+    check("显著性标签：不显著", "不显著" in significance_label(0.9))
+
+    s = summarize_tests(ps)
+    check("检验汇总计数正确",
+          s["total"] == 6 and s["significant"] == 3, str(s["significant"]))
+
+    # 数值稳定性：超大语料必须走正态近似，且结果仍在 [0,1]
+    big_p = depletion_pvalue(50, 5000, 800, 600)
+    check("大语料不溢出且落在 [0,1]", 0.0 <= big_p <= 1.0, f"{big_p:.6f}")
+    check("退化输入（零频次）不崩溃", depletion_pvalue(0, 10, 0, 5) == 1.0)
+
+
 if __name__ == "__main__":
     print("=" * 62)
     print("chem-research-loop 离线单元测试")
@@ -317,6 +368,7 @@ if __name__ == "__main__":
     test_kb_pid_resolution()
     test_checkpoint_state()
     test_reviewer_gate()
+    test_statistical_tests()
     print("\n" + "=" * 62)
     print(f"通过 {len(PASSED)} 项，失败 {len(FAILED)} 项")
     if FAILED:
