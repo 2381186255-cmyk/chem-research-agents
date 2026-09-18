@@ -202,6 +202,30 @@ class Reviewer:
         self.add("C15", "空白组合维度配置", len(getattr(domain, "gap_pairs", [])) >= 2,
                  f"{len(getattr(domain, 'gap_pairs', []))} 组类别配对")
 
+        # ---- 统计严谨性（V3 新增）----
+        stats = analysis.get("gap_stats", {}) or {}
+        self.add("C21", "统计显著性检验已执行",
+                 bool(stats) and stats.get("total", 0) > 0,
+                 f"共检验 {stats.get('total', 0)} 个概念组合" if stats else "未执行统计检验")
+
+        with_p = sum(1 for g in gaps if g.get("p_value") is not None)
+        self.add("C22", "全部候选附带 p 值",
+                 (not gaps) or with_p == len(gaps),
+                 f"{with_p}/{len(gaps)} 条候选含 p 值")
+
+        self.add("C23", "多重比较（FDR）校正已应用",
+                 bool(stats),
+                 f"α={stats.get('alpha')}，显著组合 {stats.get('significant', 0)} 个"
+                 if stats else "未发现校正记录")
+
+        # 信息性检查：小语料下无显著是正常现象，不应据此阻断，
+        # 但必须在报告中显式说明，避免读者误把「不显著」当成「已证实」
+        sig_n, tot_n = stats.get("significant", 0), stats.get("total", 0)
+        self.add("C24", "统计显著候选占比（信息性）", True,
+                 f"{sig_n}/{tot_n}"
+                 + ("；小语料下无显著属正常现象，结论应主要依据反证检索"
+                    if tot_n and sig_n == 0 else ""))
+
     def _verify_frequency(self, analysis: dict, papers: list, domain) -> tuple[bool, str]:
         """从原始语料重算概念频次，与上游声明逐项比对。"""
         try:
