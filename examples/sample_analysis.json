@@ -835,6 +835,14 @@
     "min_freq": 2,
     "min_expected": 0.6
   },
+  "gap_stats": {
+    "total": 4,
+    "alpha": 0.05,
+    "significant": 0,
+    "min_p": 0.087083,
+    "min_q": 0.272727,
+    "max_q": 0.272727
+  },
   "gaps": [
     {
       "left_category": "material",
@@ -850,7 +858,12 @@
       "feasibility": 1.0,
       "momentum": 0.375,
       "score": 0.8327,
-      "verdict": "语料内零共现（待反证）",
+      "verdict": "语料内零共现｜不显著（待反证）",
+      "p_value": 0.136364,
+      "q_value": 0.272727,
+      "odds_ratio": 0.0,
+      "lift_value": 0.0,
+      "significant": false,
       "left_exemplar": {
         "id": "10.1002/anie.202106259",
         "title": "The Current Status of MOF and COF Applications",
@@ -880,7 +893,12 @@
       "feasibility": 1.0,
       "momentum": 0.541,
       "score": 0.7989,
-      "verdict": "语料内零共现（待反证）",
+      "verdict": "语料内零共现｜不显著（待反证）",
+      "p_value": 0.272727,
+      "q_value": 0.272727,
+      "odds_ratio": 0.0,
+      "lift_value": 0.0,
+      "significant": false,
       "left_exemplar": {
         "id": "10.1002/smll.75067",
         "title": "Advanced Porous Materials in Mixed Matrix Membranes for CO&lt;sub&gt;2&lt;/sub&gt; Capture.",
@@ -910,7 +928,12 @@
       "feasibility": 1.0,
       "momentum": 0.541,
       "score": 0.7989,
-      "verdict": "语料内零共现（待反证）",
+      "verdict": "语料内零共现｜不显著（待反证）",
+      "p_value": 0.272727,
+      "q_value": 0.272727,
+      "odds_ratio": 0.0,
+      "lift_value": 0.0,
+      "significant": false,
       "left_exemplar": {
         "id": "10.1038/s41598-026-51315-2",
         "title": "Synthesis, characterization and comparative study of Zn, Fe, and Cu MOFs-impregnated polysulfone mixed-matrix membranes for CO&lt;sub&gt;2&lt;/sub&gt;/N&lt;sub&gt;2&lt;/sub&gt; gas separation.",
@@ -940,7 +963,12 @@
       "feasibility": 1.0,
       "momentum": 0.43,
       "score": 0.7257,
-      "verdict": "存在少量交叉（待反证）",
+      "verdict": "存在少量交叉｜不显著（待反证）",
+      "p_value": 0.087083,
+      "q_value": 0.272727,
+      "odds_ratio": 0.2245,
+      "lift_value": 0.4722,
+      "significant": false,
       "left_exemplar": {
         "id": "10.1039/c8cs00829a",
         "title": "Carbon capture and conversion using metal–organic frameworks and MOF-based materials",
