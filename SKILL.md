@@ -43,7 +43,7 @@ python run.py probe                                   # 数据源健康体检
 python run.py list                                    # 列出四个研究方向
 python run.py --topic "MOF CO2 capture" --domain materials --depth standard
 
-python selftest.py                                    # 54 项离线单元测试（不联网）
+python selftest.py                                    # 72 项离线单元测试（不联网）
 python test_reviewer.py <产物目录>                     # 对已有产物单独跑审稿门禁
 ```
 
@@ -58,7 +58,7 @@ python test_reviewer.py <产物目录>                     # 对已有产物单�
 
 ---
 
-## 六个角色与职责边界
+## 七个角色与职责边界
 
 **关键分工：脚本负责可计算的部分，Agent 负责需要理解的部分。**
 
@@ -68,8 +68,9 @@ python test_reviewer.py <产物目录>                     # 对已有产物单�
 | 分析师 Analyst | 概念抽取、年代趋势、共现网络、空白探测 | `analysis.json` |
 | 假设官 Hypothesizer | 把缺口转成可检验假设卡（含否证条件） | `Propos/*.json` |
 | 实验员 Experimenter | 逐条执行定向反证，给出确认/存疑/推翻 | `Verified/`、`Rejected/` |
-| 审稿人 Reviewer | 33 项检查 + 9 阻断 + 确定性证据门禁 | `review_report.md` |
+| 审稿人 Reviewer | 37 项检查 + 9 阻断 + 确定性证据门禁 | `review_report.md` |
 | 作家 Writer | 组装正式研究报告 | `Reports/research_report.md` |
+| 可视化师 Visualizer | 生成交互式可视化（零 CDN，可离线打开） | `Reports/visualization.html` |
 
 **Agent 应在此之上补做脚本做不到的事：**
 - 阅读 `Reports/research_report.md`，理解领域脉络，写出有叙述逻辑的综述
@@ -206,12 +207,14 @@ chem-research-loop/
 │   ├── domains.py        四个方向的领域策略 + 225 条同义词归并表
 │   ├── analyze.py        概念抽取 / 趋势 / 共现网络 / 空白探测与评分
 │   ├── verify.py         反证实验（假设生成 / 领域锚点 / 定向检索判定）
-│   ├── reviewer.py       审稿门禁（33 项检查 + 9 阻断 + 证据门禁）
+│   ├── reviewer.py       审稿门禁（37 项检查 + 9 阻断 + 证据门禁）
 │   ├── kb.py             结构化知识库 + 断点状态管理
+│   ├── stats.py          统计显著性检验 + 多重比较校正
 │   ├── writer.py         研究报告组装
-│   ├── orchestrator.py   主控：六角色编排 + 断点续跑 + 门禁卡点
+│   ├── visualize.py      可视化产出（自包含 HTML，零 CDN）
+│   ├── orchestrator.py   主控：七角色编排 + 断点续跑 + 门禁卡点
 │   ├── run.py            命令行入口
-│   ├── selftest.py       离线单元测试（54 项，不联网）
+│   ├── selftest.py       离线单元测试（72 项，不联网）
 │   └── test_reviewer.py  对已有产物单独跑审稿
 ├── references/
 │   └── methodology.md    方法论详解：算法定义、评分公式、调参指南
